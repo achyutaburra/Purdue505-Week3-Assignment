@@ -1,0 +1,94 @@
+---
+title: "Week3-Homework"
+output:
+  word_document: default
+  html_document: default
+date: "2026-02-01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+#### a
+```{r}
+hist(iris$Sepal.Width,
+     main = "Distribution of Sepal Width",
+     xlab = "Sepal Width",
+     xlim = c(2,4.5)
+     )
+```
+
+#### b
+Expect the mean to be  higher because the distribution is slightly right-skewed
+
+#### c
+```{r}
+print(paste("mean:", mean(iris$Sepal.Width)))
+print(paste("median:", median(iris$Sepal.Width)))
+```
+
+#### d
+```{r}
+quantile(iris$Sepal.Width, .73)
+## 27% of flowers have sepal width higher than the 73rd percentile
+```
+
+#### e
+```{r}
+pairs(iris[,c(1:4)],pch=16)
+```
+
+#### f
+Petal Length and Petal Width appear to have the strongest relationship. Sepal Width and Petal Length appear to have the weakest overall relationship
+
+## Question 2
+#### a
+```{r}
+hist(PlantGrowth$weight,
+     breaks = seq(3.3, max(PlantGrowth$weight)+ 0.3, 0.3), # start at 3.3, end at max+0.3, break by 0.3
+     main = "Dried Weight of Plants",
+     xlab = "Weight",
+     xlim = c(3.3,6.6)
+     )
+```
+
+#### b
+```{r}
+boxplot(PlantGrowth$weight~PlantGrowth$group,
+        xlab = "Experiment Group",
+        ylab = "Weight"
+        )
+```
+
+#### c
+Approximately 75% of "trt1" weights are below the minimum "trt2" weight based on the boxplots
+
+#### d
+```{r}
+trt1_weights <- PlantGrowth$weight[PlantGrowth$group=='trt1'] # all weights in group "trt1"
+min_trt2 <- PlantGrowth$weight[PlantGrowth$group=='trt2'] # minimum weight in group "trt2"
+# counting the number of "trt1" weights below the min "trt2" weight and dividing by n to find percentage
+(sum(trt1_weights < min_trt2)) / length(trt1_weights)
+
+```
+
+#### e
+```{r}
+barplot(table(PlantGrowth$group[PlantGrowth$weight > 5.5]),
+        main = "Number of Plants Heavier than 5.5 lbs",
+        xlab = "Experiment Group",
+        ylab = "Number of Plants",
+        col = hcl.colors(3, palette = "Dynamic")
+        )
+```
+
+
+
+
+
+
+
+
+
